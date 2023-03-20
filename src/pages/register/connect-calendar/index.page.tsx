@@ -2,6 +2,7 @@ import { Button, Heading, MultiStep, Text } from '@ignite-ui/react'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { ArrowRight, Check } from 'phosphor-react'
+import { FormEvent } from 'react'
 import { Container, Header } from '../styles'
 import { ConnectBox, ConnectItem, AuthError } from './styles'
 
@@ -16,6 +17,12 @@ export default function ConnectCalendar() {
     await signIn('google')
   }
 
+  async function handleNextStep(evt: FormEvent) {
+    evt.preventDefault()
+
+    await router.push('/register/time-intervals')
+  }
+
   return (
     <Container>
       <Header>
@@ -28,7 +35,7 @@ export default function ConnectCalendar() {
         <MultiStep size={4} currentStep={2} />
       </Header>
 
-      <ConnectBox>
+      <ConnectBox as="form" onSubmit={handleNextStep}>
         <ConnectItem>
           <Text>Google Calendar</Text>
           {isSignedIn ? (
