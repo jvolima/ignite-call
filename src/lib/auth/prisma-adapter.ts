@@ -39,7 +39,7 @@ export function PrismaAdapter(
           id: userIdOnCookies,
         },
         data: {
-          name: user.name,
+          name: user.name, // Replaces the name the user chose in the first step
           email: user.email,
           avatar_url: user.avatar_url,
         },
