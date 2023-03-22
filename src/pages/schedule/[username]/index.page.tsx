@@ -1,6 +1,7 @@
 import { Avatar, Heading, Text } from '@ignite-ui/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { prisma } from '../../../lib/prisma'
+import { ScheduleForm } from './ScheduleForm'
 import { Container, UserHeader } from './styles'
 
 interface ScheduleProps {
@@ -21,14 +22,16 @@ export default function Schedule({
         <Heading>{name}</Heading>
         <Text>{bio}</Text>
       </UserHeader>
+
+      <ScheduleForm />
     </Container>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [],
-    fallback: 'blocking',
+    paths: [], // no routes will be generated in build, all will be generated after their first access
+    fallback: 'blocking', // await for the build
   }
 }
 
